@@ -12,8 +12,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-        	UsersTableSeeder::class, 
-        	xmpTagsSeeder::class, 
+        	UsersTableSeeder::class,
+        	xmpTagsSeeder::class,
         	xmpUrlsSeeder::class
         ]);
     }

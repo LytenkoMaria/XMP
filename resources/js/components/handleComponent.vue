@@ -62,7 +62,7 @@
               <button class="btn btn-secondary button" @click="add">Add</button>
             </div>
           </div>
-          <div class="col">
+          <div class="col mt-2">
             <label> Include in XMP Template
             <input class="form-check-input" v-model="useInXMP" type="checkbox" value="" id="defaultCheck1">
           </label>

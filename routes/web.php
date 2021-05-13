@@ -23,5 +23,6 @@ Route::get('/dnd/get', 'DnDController@get');
 Route::get('/xmp', 'xmpController@index')->name('xmp');
 Route::post('/xmp/get', 'xmpController@getXMP');
 Route::post('/xmp/set', 'xmpController@setXMP');
+Route::post('/xmp/new/set', 'xmpController@setNewXMP');
 Route::post('/xmp/show', 'xmpController@showXMP');
 Route::post('/xmp/change', 'xmpController@changeXMP');

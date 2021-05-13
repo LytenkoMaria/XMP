@@ -10916,9 +10916,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     lists: Array
   },
   created: function created() {
-    if (this.lists) {// console.log(this.lists);
-    }
-
     this.$eventBus.$on('setStructure', this.setStructure);
   },
   beforeDestroy: function beforeDestroy() {
@@ -10930,6 +10927,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       changeXMPitem: [],
       change: false,
       list2: [],
+      list: [],
       items: {},
       dragging: false,
       missList: false,
@@ -10944,8 +10942,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     };
   },
   methods: {
-    log: function log(evt) {
-      window.console.log(evt);
+    log: function log(evt) {//window.console.log(evt);
     },
     getNewXMP: function getNewXMP(item) {
       var _this = this;
@@ -10959,9 +10956,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           'item': this.changeXMPitem,
           'XMPforChange': this.xmp
         }).then(function (response) {
-          //console.log(response["data"]["newXMP"]);
-          console.log('this.formData', _this.formData);
-
           _this.setXmp(response["data"]["newXMP"]);
         }, function (error) {
           console.log(error.message);
@@ -10972,10 +10966,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     },
     generate: function generate() {
       this.items = {};
-      console.log('go', this.list2);
 
       if (this.list2.length > 0) {
-        console.log('list2', this.list2);
         this.list2.forEach(function (item, i, list2) {
           this.$eventBus.$emit('getStructure', item.id);
         }.bind(this));
@@ -10983,7 +10975,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }
     },
     setStructure: function setStructure(item, name, prefix) {
-      console.log('set');
       this.usedTags.push(prefix);
       this.items[prefix + ":" + name] = item;
     },
@@ -10995,9 +10986,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       xmp['x:xmpmeta'] = {};
       xmp['x:xmpmeta']['rdf:Description'] = this.items;
       xmp['tags'] = this.usedTags;
-      console.log(xmp);
-      axios.post('/xmp/set', xmp).then(function (response) {
-        console.log('vvvv', response.data);
+      axios.post('/xmp/new/set', xmp).then(function (response) {
         _this2.xmpContent = response.data;
       }, function (error) {
         console.log(error.message);
@@ -11020,11 +11009,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           var it = this.missEvent.dragged._underlying_vm_;
 
           if (fromId === this.lists[key].prefix) {
-            this.removeByAttr(this.lists[key].list, 'tag_id', id); // console.log("Remove from " + fromId);
+            this.removeByAttr(this.lists[key].list, 'tag_id', id);
           }
 
           if (toId === this.lists[key].prefix) {
-            this.lists[key].list.push(it); // console.log("Add to " + toId + "; ID = " + id);
+            this.lists[key].list.push(it);
           }
         }.bind(this));
         this.missList = false;
@@ -11053,8 +11042,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       for (var i = 0; i < arr.length; i++) {
         var str = arr[i];
         obj[str] = true; // запомнить строку в виде свойства объекта
-      } //console.log('ss',obj);
-
+      }
 
       return Object.keys(obj); // или собрать ключи перебором для IE8-
     },
@@ -11082,7 +11070,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         var xmp = {};
 
         if (response.data['extractXMP']["@root"]) {
-          console.log(response);
           xmp[response.data['extractXMP']["@root"]] = response.data['extractXMP']['rdf:RDF'];
 
           if (response.data['extractXMP']["@attributes"]) {
@@ -11090,20 +11077,26 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           }
 
           _this3.xmpDescription = xmp['x:xmpmeta']['rdf:Description'];
-          _this3.xmp = xmp; //console.log(xmp);
-
+          _this3.xmp = xmp;
           axios.post('/xmp/show', {
             'Description': _this3.xmpDescription,
-            'xmp': xmp
+            'xmp': xmp,
+            'list': _this3.lists
           }).then(function (response) {
-            _this3.list2 = response.data.list2; //console.log('List2',this.list2 );
+            _this3.list2 = response.data.list2;
+            _this3.saveList = response.data.list;
+
+            for (var population in _this3.saveList) {
+              _this3.mas = [response.data.list[population].list[0]];
+              response.data.list[population].list = null;
+              response.data.list[population].list = _this3.mas[0];
+            }
+
+            _this3.lists = response.data.list;
           }, function (error) {
             console.log(error.message);
           });
-        } //console.log('fffffffffffffffffffff',this.formData);
-        //this.setXmp(xmp);
-        //this.getInfo(xmp)*/
-
+        }
       }, function (error) {
         console.log('errrr');
 
@@ -11134,9 +11127,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       axios.post('xmp/set', {
         'xmp': xmp,
         'changeImageName': this.changeImageName
-      }).then(function (response) {
-        console.log("aaaaaaaaaaaaaaaaaaa", response.data);
-      }, function (error) {
+      }).then(function (response) {}, function (error) {
         console.log(error.message);
       });
     },
@@ -11635,7 +11626,6 @@ __webpack_require__.r(__webpack_exports__);
     datePicker: vue_bootstrap_datetimepicker__WEBPACK_IMPORTED_MODULE_3___default.a
   },
   created: function created() {
-    console.log(this.item);
     this.$eventBus.$on('test', this.getChangeXMP);
     this.$eventBus.$on('getStructure', this.getStructure);
     this.$on('input', this.getInput);
@@ -11705,8 +11695,13 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     if (this.item.url && !this.item.bind) {
-      this.item.bind = "https://";
-      this.list[0].text = this.item.bind;
+      if (!this.item.text) {
+        this.list[0].text = "https://";
+      } else {
+        this.list[0].text = this.item.text[0];
+      }
+
+      console.log('bind', this.item.text[0]);
     }
   },
   beforeDestroy: function beforeDestroy() {
@@ -11734,13 +11729,11 @@ __webpack_require__.r(__webpack_exports__);
               id: this.globalElId,
               text: this.item.text[i],
               selects: []
-            }); //console.log(' this.list', this.list)
-
+            });
             this.reIndexing();
           }
         }
       } else {
-        console.log('get-text', this.item['text']);
         this.globalElId++;
         this.list.push({
           name: this.item.label,
@@ -71937,7 +71930,7 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col" }, [
+          _c("div", { staticClass: "col mt-2" }, [
             _c("label", [
               _vm._v(" Include in XMP Template\n          "),
               _c("input", {
@@ -72340,7 +72333,7 @@ var render = function() {
               : _vm._e()
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col mt-1" }, [
+          _c("div", { staticClass: "col mt-2" }, [
             _c("label", [
               _vm._v(" Include in XMP Template\n          "),
               _c("input", {

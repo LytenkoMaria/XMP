@@ -119,9 +119,6 @@ export default {
     lists: Array,
   },
   created() {
-    if (this.lists) {
-       // console.log(this.lists);
-    }
     this.$eventBus.$on('setStructure', this.setStructure);
   },
 
@@ -134,6 +131,7 @@ export default {
       changeXMPitem: [],
       change: false,
       list2: [],
+      list: [],
       items: {},
       dragging: false,
       missList: false,
@@ -149,7 +147,7 @@ export default {
   },
   methods: {
     log: function(evt) {
-      window.console.log(evt);
+        //window.console.log(evt);
     },
     getNewXMP: function(item) {
         this.changeXMPitem.push(item);
@@ -159,8 +157,6 @@ export default {
             axios.post('/xmp/change', {'item': this.changeXMPitem, 'XMPforChange': this.xmp} )
                 .then(
                     (response) => {
-                        //console.log(response["data"]["newXMP"]);
-                        console.log('this.formData',this.formData);
                         this.setXmp(response["data"]["newXMP"]);
                     },
                     (error) => {
@@ -173,9 +169,7 @@ export default {
     },
     generate: function() {
       this.items = {};
-      console.log('go',this.list2);
       if (this.list2.length > 0) {
-          console.log('list2',this.list2);
         this.list2.forEach(function(item, i, list2) {
           this.$eventBus.$emit('getStructure', item.id);
         }.bind(this));
@@ -183,7 +177,6 @@ export default {
       }
     },
     setStructure: function(item, name, prefix) {
-        console.log('set')
       this.usedTags.push(prefix);
       this.items[prefix + ":" + name] = item;
     },
@@ -193,11 +186,9 @@ export default {
       xmp['x:xmpmeta'] = {};
       xmp['x:xmpmeta']['rdf:Description'] = this.items;
       xmp['tags'] = this.usedTags;
-      console.log(xmp);
-      axios.post('/xmp/set', xmp)
+      axios.post('/xmp/new/set', xmp)
           .then(
               (response) => {
-              console.log('vvvv',response.data);
               this.xmpContent = response.data;
           },
           (error) => {
@@ -225,11 +216,9 @@ export default {
 
           if (fromId === this.lists[key].prefix) {
             this.removeByAttr(this.lists[key].list, 'tag_id', id);
-            // console.log("Remove from " + fromId);
           }
           if (toId === this.lists[key].prefix) {
             this.lists[key].list.push(it);
-            // console.log("Add to " + toId + "; ID = " + id);
           }
         }.bind(this));
 
@@ -259,7 +248,7 @@ export default {
         var str = arr[i];
         obj[str] = true; // запомнить строку в виде свойства объекта
       }
-      //console.log('ss',obj);
+
       return Object.keys(obj); // или собрать ключи перебором для IE8-
     },
     getCollaps: function(index, sharp = false) {
@@ -282,20 +271,24 @@ export default {
                       this.changeImageName = response.data["imageName"];
                       var xmp = {};
                       if (response.data['extractXMP']["@root"]) {
-                          console.log(response)
                           xmp[response.data['extractXMP']["@root"]] = response.data['extractXMP']['rdf:RDF'];
                           if (response.data['extractXMP']["@attributes"]) {
                               xmp[response.data['extractXMP']["@root"]]["@attributes"] = response.data['extractXMP']["@attributes"];
                           }
                           this.xmpDescription = xmp['x:xmpmeta']['rdf:Description'];
                           this.xmp = xmp;
-                          //console.log(xmp);
-                          axios.post('/xmp/show', {'Description': this.xmpDescription, 'xmp': xmp})
+                          axios.post('/xmp/show', {'Description': this.xmpDescription, 'xmp': xmp , 'list': this.lists})
                               .then(
                                   (response) => {
 
                                       this.list2 = response.data.list2;
-                                      //console.log('List2',this.list2 );
+                                      this.saveList = response.data.list
+                                      for (let population in this.saveList) {
+                                          this.mas = [response.data.list[population].list[0]]
+                                          response.data.list[population].list = null;
+                                          response.data.list[population].list = (this.mas[0]);
+                                      }
+                                      this.lists = response.data.list;
 
                                   },
                                   (error) => {
@@ -303,9 +296,6 @@ export default {
                                   }
                               )
                       }
-                      //console.log('fffffffffffffffffffff',this.formData);
-                      //this.setXmp(xmp);
-                      //this.getInfo(xmp)*/
                   },
                   (error) => {
                       console.log('errrr')
@@ -334,7 +324,7 @@ export default {
           axios.post('xmp/set', {'xmp':xmp, 'changeImageName': this.changeImageName } )
               .then(
                   (response) => {
-                      console.log("aaaaaaaaaaaaaaaaaaa",response.data);
+
                   },
                   (error) => {
                       console.log(error.message);

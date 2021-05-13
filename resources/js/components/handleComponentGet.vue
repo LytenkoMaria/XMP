@@ -62,7 +62,7 @@
               <button class="btn btn-secondary button" @click="newAdd()">Add</button>
             </div>
           </div>
-          <div class="col mt-1">
+          <div class="col mt-2">
             <label> Include in XMP Template
             <input class="form-check-input" v-model="useInXMP" type="checkbox" value="" id="defaultCheck1">
           </label>
@@ -114,7 +114,6 @@
       datePicker
   },
   created() {
-      console.log(this.item);
     this.$eventBus.$on('test', this.getChangeXMP);
     this.$eventBus.$on('getStructure', this.getStructure);
     this.$on('input', this.getInput);
@@ -170,8 +169,11 @@
     }
 
     if (this.item.url && !this.item.bind) {
-      this.item.bind = "https://";
-      this.list[0].text = this.item.bind;
+      if (!this.item.text) {
+          this.list[0].text = "https://";
+      }
+      else {this.list[0].text = this.item.text[0];}
+      console.log('bind',this.item.text[0]);
     }
   },
 
@@ -194,13 +196,11 @@
                 {
                     this.globalElId++
                     this.list.push({ name: this.item.label, id: this.globalElId, text: this.item.text[i] , selects: [] });
-                    //console.log(' this.list', this.list)
                     this.reIndexing();
                 }
             }
         }
         else {
-        console.log('get-text',this.item['text']);
         this.globalElId++
         this.list.push({ name: this.item.label, id: this.globalElId, text: this.item.bind , selects: [] });
         this.reIndexing();

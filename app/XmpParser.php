@@ -89,12 +89,20 @@ class XmpParser
             $xmpContent = $this->getXmpXmlString($content);
             $xmpContent = $this -> normolizeXMP($xmpContent);
             $this->getTags($xmpContent);
-            $doc->loadXML($xmpContent);
+            //dd($xmpContent);
+            $newXmpString = str_replace('><','> <', $xmpContent);
+            $newXmpString = str_replace('"Iptc4xm','" Iptc4xm', $newXmpString);
+            $newXmpString = str_replace('/ ','/', $newXmpString);
+            //dd($newXmpString);
+            $doc->loadXML($newXmpString);
+            //dd($doc);
             $root = $doc->documentElement;
+            //dd($root);
             $output = $this->convertDomNode($root);
             $output['@root'] = $root->tagName;
             return $output;
         } catch (\Exception $e) {
+            dd('sssssssssssssss');
             return [];
         }
     }
@@ -131,14 +139,37 @@ class XmpParser
     {
         try {
             $file = new SplFileInfo($file);
-            $contents = file_get_contents($file->getPathname());
+            $f=fopen($file->getPathname(),"r");
+            //dd($f);
+            $contents = fread($f, filesize($file->getPathname()));
+            //$e=fgets($f,5);
+            fclose($f);
+            //dd($e);
+
+            //$contents = file_get_contents($file->getPathname());
+            //$xmpDataStart = strpos($contents, '<x:xmpmeta');
+           // dd($xmpDataStart);
+            //$xmpDataEnd = strpos($contents, '</x:xmpmeta>');
+            //$xmpLength = $xmpDataEnd - $xmpDataStart;
+            //$lastXMP = substr($contents, 50000, 70000);
+            //fclose($file->getPathname());
+
+            //$f=fopen($file->getPathname());
+            //dd($f);
         } catch (\Exception $e) {
             // throw new FileNotFoundException('The given File could not be found.');
         }
+        //$contents ='aaa';
+        //$xmpDataStart = strpos($contents, '<x:xmpmeta');
+        //$xmpDataEnd = strpos($contents, '</x:xmpmeta>');
+        //$xmpLength = $xmpDataEnd - $xmpDataStart;
+        //dd(substr($contents, $xmpDataStart, $xmpLength + 12));
+        $x = file_get_contents('images/last.txt');
         return $this->extractFromContent($contents);
     }
     private function getXmpXmlString(string $content): string
     {
+        //dd($content);
         $xmpDataStart = strpos($content, '<x:xmpmeta');
         $xmpDataEnd = strpos($content, '</x:xmpmeta>');
         $xmpLength = $xmpDataEnd - $xmpDataStart;

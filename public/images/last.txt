@@ -1,3 +1,555 @@
-<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 4.4.0-Exiv2">
-<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><rdf:Description rdf:about=""
-xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/" xmlns:xmpRights="http://ns.adobe.com/xap/1.0/rights/" xmlns:xmp="http://ns.adobe.com/xap/1.0/" xmlns:photomechanic="http://ns.camerabits.com/photomechanic/1.0/" xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/" xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/" xmlns:plus="http://ns.useplus.org/ldf/xmp/1.0/" xmlns:aux="http://ns.adobe.com/exif/1.0/aux/" xmlns:dc="http://purl.org/dc/elements/1.1/" photoshop:City="City (Core) (PMS_2019)" photoshop:State="Province/State (Core) (PMS_2019)" photoshop:Country="Country (Core) (PMS_2019)" photoshop:Category="Category (PMS_2019)" photoshop:AuthorsPosition="Creator's Job Title (PMS_2019)" photoshop:Credit="Credit Line (PMS_2019)" photoshop:Source="Source (PMS_2019)" photoshop:CaptionWriter="Description Writer (PMS_2019)" photoshop:Headline="The Headline (PMS_2019)" photoshop:Instructions="An Instruction (PMS_2019)" photoshop:TransmissionReference="Job Id (PMS_2019)" photoshop:DateCreated="2016-11-21T16:01:01+02:00" xmpRights:Marked="True" xmpRights:WebStatement="www.copyright.com_PMS_2019" xmp:CreateDate="2016-11-21T16:01:01+02:00" photomechanic:EditStatus="Edit Status (PMS_2019)" photomechanic:Prefs="-1:-1:-1:000000" photomechanic:PMVersion="PM5" Iptc4xmpCore:CountryCode="R16" Iptc4xmpCore:Location="Sublocation (Core) (PMS_2019)" Iptc4xmpCore:IntellectualGenre="A Genre (PMS_2019)" Iptc4xmpExt:AddlModelInfo="Additional Model Info (PMS_2019)" Iptc4xmpExt:MaxAvailWidth="20" Iptc4xmpExt:MaxAvailHeight="14" Iptc4xmpExt:DigitalSourceType="http://cv.iptc.org/newscodes/digitalsourcetype/softwareImage" plus:MinorModelAgeDisclosure="http://ns.useplus.org/ldf/vocab/AG-A25" plus:ModelReleaseStatus="http://ns.useplus.org/ldf/vocab/MR-NAP" plus:PropertyReleaseStatus="http://ns.useplus.org/ldf/vocab/PR-NAP" plus:ImageSupplierImageID="Image Supplier Image ID (PMS_2019)" aux:ImageNumber="0"><photoshop:SupplementalCategories><rdf:Bag><rdf:li>Supp Cat 1 (PMS_2019)</rdf:li><rdf:li>Supp Cat 2 (PMS_2019)</rdf:li><rdf:li>Supp Catt 3 (PMS_2019)</rdf:li></rdf:Bag></photoshop:SupplementalCategories><xmpRights:UsageTerms><rdf:Alt><rdf:li xml:lang="x-default">Rights Usage Termns (PMS_2019)</rdf:li></rdf:Alt></xmpRights:UsageTerms><Iptc4xmpCore:Scene><rdf:Bag><rdf:li>IPTC-Scene-Code1 (PMS_2019)</rdf:li><rdf:li>IPTC-Scene-Code2 (PMS_2019)</rdf:li></rdf:Bag></Iptc4xmpCore:Scene><Iptc4xmpCore:SubjectCode><rdf:Bag><rdf:li>1PMS_2019</rdf:li><rdf:li>2PMS_2019</rdf:li><rdf:li>3PMS_2019</rdf:li></rdf:Bag></Iptc4xmpCore:SubjectCode><Iptc4xmpCore:CreatorContactInfo Iptc4xmpCore:CiAdrExtadr="Creator's CI: Address, line 1 (PMS_2019)" Iptc4xmpCore:CiAdrCity="Creator's CI: City (PMS_2019)" Iptc4xmpCore:CiAdrRegion="Creator's CI: State/Province (PMS_2019)" Iptc4xmpCore:CiAdrPcode="Creator's CI: Postcode (PMS_2019)" Iptc4xmpCore:CiAdrCtry="Creator's CI: Country (PMS_2019)" Iptc4xmpCore:CiTelWork="Creator's CI: Phone # 1, Phone # 2 (PMS_2019)" Iptc4xmpCore:CiEmailWork="Creator's CI: Email@1, Email@2 (PMS_2019)" Iptc4xmpCore:CiUrlWork="http://www.Creators.CI/WebAddress/PMS_2019"/><Iptc4xmpExt:PersonInImage><rdf:Bag><rdf:li>Person Shown 1 (PMS_2019)</rdf:li><rdf:li>Person Shown 2 (PMS_2019)</rdf:li></rdf:Bag></Iptc4xmpExt:PersonInImage><Iptc4xmpExt:LocationCreated><rdf:Bag><rdf:li Iptc4xmpExt:Sublocation="Sublocation (Location created1) (PMS_2019)" Iptc4xmpExt:City="City (Location created1) (PMS_2019)" Iptc4xmpExt:ProvinceState="Province/State (Location created1) (PMS_2019)" Iptc4xmpExt:CountryName="CountryName (Location created1) (PMS_2019)" Iptc4xmpExt:CountryCode="R16" Iptc4xmpExt:WorldRegion="Worldregion (Location created1) (PMS_2019)"/></rdf:Bag></Iptc4xmpExt:LocationCreated><Iptc4xmpExt:LocationShown><rdf:Bag><rdf:li Iptc4xmpExt:Sublocation="Sublocation (Location shown1) (PMS_2019)" Iptc4xmpExt:City="City (Location shown1) (PMS_2019)" Iptc4xmpExt:ProvinceState="Province/State (Location shown1) (PMS_2019)" Iptc4xmpExt:CountryName="CountryName (Location shown1) (PMS_2019)" Iptc4xmpExt:CountryCode="R16" Iptc4xmpExt:WorldRegion="Worldregion (Location shown1) (PMS_2019)"/><rdf:li Iptc4xmpExt:Sublocation="Sublocation (Location shown2) (PMS_2019)" Iptc4xmpExt:City="City (Location shown2) (PMS_2019)" Iptc4xmpExt:ProvinceState="Province/State (Location shown2) (PMS_2019)" Iptc4xmpExt:CountryName="CountryName (Location shown2) (PMS_2019)" Iptc4xmpExt:CountryCode="R16" Iptc4xmpExt:WorldRegion="Worldregion (Location shown2) (PMS_2019)"/></rdf:Bag></Iptc4xmpExt:LocationShown><Iptc4xmpExt:OrganisationInImageName><rdf:Bag><rdf:li>Organisation Name 1 (PMS_2019)</rdf:li><rdf:li>Organisation Name 2 (PMS_2019)</rdf:li><rdf:li>Organisation Name 3 (PMS_2019)</rdf:li></rdf:Bag></Iptc4xmpExt:OrganisationInImageName><Iptc4xmpExt:OrganisationInImageCode><rdf:Bag><rdf:li>Organisation Code 1 (PMS_2019)</rdf:li><rdf:li>Organisation Code 2 (PMS_2019)</rdf:li><rdf:li>Organisation Code 3 (PMS_2019)</rdf:li></rdf:Bag></Iptc4xmpExt:OrganisationInImageCode><Iptc4xmpExt:Event><rdf:Alt><rdf:li xml:lang="x-default">An Event (PMS_2019)</rdf:li></rdf:Alt></Iptc4xmpExt:Event><Iptc4xmpExt:ModelAge><rdf:Bag><rdf:li>25</rdf:li><rdf:li>27</rdf:li><rdf:li>30</rdf:li></rdf:Bag></Iptc4xmpExt:ModelAge><Iptc4xmpExt:RegistryId><rdf:Bag><rdf:li Iptc4xmpExt:RegOrgId="Registry Organisation ID 1 (PMS_2019)" Iptc4xmpExt:RegItemId="Registry Image ID 1 (PMS_2019)"/><rdf:li Iptc4xmpExt:RegOrgId="Registry Organisation ID 2 (PMS_2019)" Iptc4xmpExt:RegItemId="Registry Image ID 2 (PMS_2019)"/></rdf:Bag></Iptc4xmpExt:RegistryId><Iptc4xmpExt:ArtworkOrObject><rdf:Bag><rdf:li> <rdf:Description Iptc4xmpExt:AOCopyrightNotice="AO Copyright Notice 1 (PMS_2019)" Iptc4xmpExt:AOCurrentCopyrightOwnerName="AO Current Copyright Owner Name 1 (PMS_2019)" Iptc4xmpExt:AOCurrentCopyrightOwnerId="AO Current Copyright Owner ID 1 (PMS_2019)" Iptc4xmpExt:AOCurrentLicensorName="AO Current Licensor Name 1 (PMS_2019)" Iptc4xmpExt:AOCurrentLicensorId="AO Current Licensor ID 1 (PMS_2019)" Iptc4xmpExt:AODateCreated="1916-10-26T12:13:14+00:00" Iptc4xmpExt:AOCircaDateCreated="AO Circa Date: between 1550 and 1600 (PMS_2019)" Iptc4xmpExt:AOSource="AO Source 1 (PMS_2019)" Iptc4xmpExt:AOSourceInvNo="AO Source Inventory No 1 (PMS_2019)" Iptc4xmpExt:AOSourceInvURL="AO Source Inventory URL (PMS_2019)"><Iptc4xmpExt:AOCreator><rdf:Seq><rdf:li>AO Creator Name 1a (PMS_2019)</rdf:li><rdf:li>AO Creator Name 1b (PMS_2019)</rdf:li></rdf:Seq></Iptc4xmpExt:AOCreator><Iptc4xmpExt:AOCreatorId><rdf:Seq><rdf:li>AO Creator Id 1a (PMS_2019)</rdf:li><rdf:li>AO Creator Id 1b (PMS_2019)</rdf:li></rdf:Seq></Iptc4xmpExt:AOCreatorId><Iptc4xmpExt:AOStylePeriod><rdf:Bag><rdf:li>AO Style Baroque (PMS_2019)</rdf:li><rdf:li>AO Style Italian Baroque (PMS_2019)</rdf:li></rdf:Bag></Iptc4xmpExt:AOStylePeriod><Iptc4xmpExt:AOContentDescription><rdf:Alt><rdf:li xml:lang="x-default">AO Content Description 1 (PMS_2019)</rdf:li></rdf:Alt></Iptc4xmpExt:AOContentDescription><Iptc4xmpExt:AOContributionDescription><rdf:Alt><rdf:li xml:lang="x-default">AO Contribution Description 1 (PMS_2019)</rdf:li></rdf:Alt></Iptc4xmpExt:AOContributionDescription><Iptc4xmpExt:AOPhysicalDescription><rdf:Alt><rdf:li xml:lang="x-default">AO Physical Description 1 (PMS_2019)</rdf:li></rdf:Alt></Iptc4xmpExt:AOPhysicalDescription><Iptc4xmpExt:AOTitle><rdf:Alt><rdf:li xml:lang="x-default">AO Title 1 (PMS_2019)</rdf:li></rdf:Alt></Iptc4xmpExt:AOTitle></rdf:Description></rdf:li></rdf:Bag></Iptc4xmpExt:ArtworkOrObject><plus:ModelReleaseID><rdf:Bag><rdf:li>Model Release ID 1 (PMS_2019)</rdf:li><rdf:li>Model Release ID 2 (PMS_2019)</rdf:li></rdf:Bag></plus:ModelReleaseID><plus:ImageCreator><rdf:Seq><rdf:li plus:ImageCreatorName="Image Creator Name 1 (PMS_2019)" plus:ImageCreatorID="Image Creator Id 1 (PMS_2019)"/><rdf:li plus:ImageCreatorName="Image Creator Name 2 (PMS_2019)" plus:ImageCreatorID="Image Creator Id 2 (PMS_2019)"/></rdf:Seq></plus:ImageCreator><plus:CopyrightOwner><rdf:Seq><rdf:li plus:CopyrightOwnerName="Copyright Owner Name 1 (PMS_2019)" plus:CopyrightOwnerID="Copyright Owner Id 1 (PMS_2019)"/><rdf:li plus:CopyrightOwnerName="Copyright Owner Name 2 (PMS_2019)" plus:CopyrightOwnerID="Copyright Owner Id 2 (PMS_2019)"/></rdf:Seq></plus:CopyrightOwner><plus:PropertyReleaseID><rdf:Bag><rdf:li>Property Release ID 1 (PMS_2019)</rdf:li><rdf:li>Property Release ID 2 (PMS_2019)</rdf:li></rdf:Bag></plus:PropertyReleaseID><plus:ImageSupplier><rdf:Seq><rdf:li plus:ImageSupplierName="Image Supplier Name (PMS_2019)" plus:ImageSupplierID="Image Supplier Id (PMS_2019)"/></rdf:Seq></plus:ImageSupplier><dc:creator><rdf:Seq><rdf:li>Creator1 (PMS_2019)</rdf:li> <rdf:li>Creator2 (PMS_2019)</rdf:li></rdf:Seq></dc:creator><dc:description><rdf:Alt><rdf:li xml:lang="x-default">The description aka caption (PMS_2019)</rdf:li></rdf:Alt></dc:description><dc:rights><rdf:Alt><rdf:li xml:lang="x-default">Copyright (Notice) 2016 IPTC - www.iptc.org (PMS_2019)</rdf:li></rdf:Alt></dc:rights><dc:subject><rdf:Bag><rdf:li>Keyword1PMS_2019</rdf:li><rdf:li>Keyword2PMS_2019</rdf:li><rdf:li>Keyword3PMS_2019</rdf:li></rdf:Bag></dc:subject><dc:title><rdf:Alt><rdf:li xml:lang="x-default">The Title (PMS_2019)</rdf:li></rdf:Alt></dc:title></rdf:Description></rdf:RDF></x:xmpmeta>
+0 => array:3 [
+    "name" => "Photoshop"
+    "prefix" => "photoshop"
+    "list" => []
+  ]
+  1 => array:3 [
+    "name" => "XMP Rights Management"
+    "prefix" => "xmpRights"
+    "list" => array:5 [
+      0 => array:11 [
+        "tag_id" => 22
+        "name" => "Certificate"
+        "label" => "Certificate"
+        "prefix" => "xmpRights"
+        "type" => "XmpText"
+        "valueType" => "URL"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 23
+        "name" => "Marked"
+        "label" => "Marked"
+        "prefix" => "xmpRights"
+        "type" => "XmpText"
+        "valueType" => "Boolean"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      2 => array:11 [
+        "tag_id" => 24
+        "name" => "Owner"
+        "label" => "Owner"
+        "prefix" => "xmpRights"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      3 => array:11 [
+        "tag_id" => 25
+        "name" => "UsageTerms"
+        "label" => "Usage Terms"
+        "prefix" => "xmpRights"
+        "type" => "LangAlt"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      4 => array:11 [
+        "tag_id" => 26
+        "name" => "WebStatement"
+        "label" => "Web Statement"
+        "prefix" => "xmpRights"
+        "type" => "XmpText"
+        "valueType" => "URL"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+    ]
+  ]
+  2 => array:3 [
+    "name" => "Dublin Core"
+    "prefix" => "dc"
+    "list" => array:9 [
+      0 => array:11 [
+        "tag_id" => 2
+        "name" => "subject"
+        "label" => "Subject"
+        "prefix" => "dc"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 3
+        "name" => "description"
+        "label" => "Description"
+        "prefix" => "dc"
+        "type" => "LangAlt"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      2 => array:11 [
+        "tag_id" => 4
+        "name" => "creator"
+        "label" => "Creator"
+        "prefix" => "dc"
+        "type" => "XmpSeq"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      3 => array:11 [
+        "tag_id" => 5
+        "name" => "title"
+        "label" => "Title"
+        "prefix" => "dc"
+        "type" => "LangAlt"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      4 => array:11 [
+        "tag_id" => 6
+        "name" => "rights"
+        "label" => "Rights"
+        "prefix" => "dc"
+        "type" => "LangAlt"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      5 => array:11 [
+        "tag_id" => 7
+        "name" => "publisher"
+        "label" => "Publisher"
+        "prefix" => "dc"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      6 => array:11 [
+        "tag_id" => 8
+        "name" => "identifier"
+        "label" => "Identifier"
+        "prefix" => "dc"
+        "type" => "XmpText"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      7 => array:11 [
+        "tag_id" => 9
+        "name" => "contributor"
+        "label" => "Contributor"
+        "prefix" => "dc"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      8 => array:11 [
+        "tag_id" => 10
+        "name" => "date"
+        "label" => "Date"
+        "prefix" => "dc"
+        "type" => "XmpSeq"
+        "valueType" => "Date"
+        "category" => "External"
+        "description" => null
+        "bind" => "YYYY-MM-DD"
+        "readonly" => 0
+        "enumeration" => null
+      ]
+    ]
+  ]
+  3 => array:3 [
+    "name" => "XMP Basic"
+    "prefix" => "xmp"
+    "list" => array:6 [
+      0 => array:11 [
+        "tag_id" => 11
+        "name" => "Advisory"
+        "label" => "Advisory"
+        "prefix" => "xmp"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 13
+        "name" => "CreateDate"
+        "label" => "Create Date"
+        "prefix" => "xmp"
+        "type" => "XmpText"
+        "valueType" => "Date"
+        "category" => "External"
+        "description" => null
+        "bind" => "YYYY-MM-DDTh:mm:ss"
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      2 => array:11 [
+        "tag_id" => 15
+        "name" => "Identifier"
+        "label" => "Identifier"
+        "prefix" => "xmp"
+        "type" => "XmpBag"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      3 => array:11 [
+        "tag_id" => 16
+        "name" => "Label"
+        "label" => "Label"
+        "prefix" => "xmp"
+        "type" => "XmpText"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      4 => array:11 [
+        "tag_id" => 19
+        "name" => "Nickname"
+        "label" => "Nickname"
+        "prefix" => "xmp"
+        "type" => "XmpText"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      5 => array:11 [
+        "tag_id" => 20
+        "name" => "Rating"
+        "label" => "Rating"
+        "prefix" => "xmp"
+        "type" => "XmpText"
+        "valueType" => "ClosedChoice"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => array:11 [
+          0 => 0
+          1 => 1
+          2 => 2
+          3 => 3
+          4 => 4
+          5 => 5
+          6 => 6
+          7 => 7
+          8 => 8
+          9 => 9
+          10 => 10
+        ]
+      ]
+    ]
+  ]
+  4 => array:3 [
+    "name" => null
+    "prefix" => "photomechanic"
+    "list" => []
+  ]
+  5 => array:3 [
+    "name" => "IPTC Core"
+    "prefix" => "Iptc4xmpCore"
+    "list" => array:10 [
+      0 => array:11 [
+        "tag_id" => 29
+        "name" => "CreatorContactInfo"
+        "label" => "Creator's Contact Info"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 30
+        "name" => "CiAdrExtadr"
+        "label" => "Contact Info-Address"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      2 => array:11 [
+        "tag_id" => 31
+        "name" => "CiAdrCity"
+        "label" => "Contact Info-City"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      3 => array:11 [
+        "tag_id" => 32
+        "name" => "CiAdrRegion"
+        "label" => "Contact Info-State/Province"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      4 => array:11 [
+        "tag_id" => 33
+        "name" => "CiAdrPcode"
+        "label" => "Contact Info-Postal Code"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      5 => array:11 [
+        "tag_id" => 34
+        "name" => "CiAdrCtry"
+        "label" => "Contact Info-Country"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      6 => array:11 [
+        "tag_id" => 35
+        "name" => "CiEmailWork"
+        "label" => "Contact Info-Email"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      7 => array:11 [
+        "tag_id" => 36
+        "name" => "CiTelWork"
+        "label" => "Contact Info-Phone"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      8 => array:11 [
+        "tag_id" => 37
+        "name" => "CiUrlWork"
+        "label" => "Contact Info-Web URL"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      9 => array:11 [
+        "tag_id" => 38
+        "name" => "IntellectualGenre"
+        "label" => "Intellectual Genre"
+        "prefix" => "Iptc4xmpCore"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+    ]
+  ]
+  6 => array:3 [
+    "name" => "IPTC Extension"
+    "prefix" => "Iptc4xmpExt"
+    "list" => []
+  ]
+  7 => array:3 [
+    "name" => "PLUS License Data Format"
+    "prefix" => "plus"
+    "list" => []
+  ]
+  8 => array:3 [
+    "name" => "Exif Schema for Additional Exif Properties"
+    "prefix" => "aux"
+    "list" => []
+  ]
+  9 => array:3 [
+    "name" => "Exif Schema for Exif-specific Properties"
+    "prefix" => "exif"
+    "list" => []
+  ]
+  10 => array:3 [
+    "name" => "Exif Schema for TIFF Properties"
+    "prefix" => "tiff"
+    "list" => array:2 [
+      0 => array:11 [
+        "tag_id" => 27
+        "name" => "Artist"
+        "label" => "Artist"
+        "prefix" => "tiff"
+        "type" => "XmpText"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 28
+        "name" => "Copyright"
+        "label" => "Copyright"
+        "prefix" => "tiff"
+        "type" => "LangAlt"
+        "valueType" => null
+        "category" => "External"
+        "description" => null
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+    ]
+  ]
+  11 => array:3 [
+    "name" => null
+    "prefix" => "xap"
+    "list" => []
+  ]
+  12 => array:3 [
+    "name" => null
+    "prefix" => "stRef"
+    "list" => []
+  ]
+  13 => array:3 [
+    "name" => null
+    "prefix" => "xapMM"
+    "list" => []
+  ]
+  14 => array:3 [
+    "name" => "Test"
+    "prefix" => "test"
+    "list" => array:3 [
+      0 => array:11 [
+        "tag_id" => 39
+        "name" => "TestText"
+        "label" => "Test Text"
+        "prefix" => "test"
+        "type" => "XmpText"
+        "valueType" => "Text"
+        "category" => "External"
+        "description" => "Test description"
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => null
+      ]
+      1 => array:11 [
+        "tag_id" => 40
+        "name" => "TestArr"
+        "label" => "Test Arr"
+        "prefix" => "test"
+        "type" => "XmpText"
+        "valueType" => "ClosedChoice"
+        "category" => "External"
+        "description" => "Test description"
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => array:2 [
+          "index1" => "value1"
+          "index2" => "value2"
+        ]
+      ]
+      2 => array:11 [
+        "tag_id" => 41
+        "name" => "TestArrM"
+        "label" => "Test Arr M"
+        "prefix" => "test"
+        "type" => "XmpBag"
+        "valueType" => "ClosedChoice"
+        "category" => "External"
+        "description" => "Test description"
+        "bind" => null
+        "readonly" => 0
+        "enumeration" => array:2 [
+          "index1" => "value1"
+          "index2" => "value2"
+        ]
+      ]
+    ]
+  ]
+]

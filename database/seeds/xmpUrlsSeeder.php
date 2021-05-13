@@ -25,11 +25,9 @@ array('prefix' => "plus", 			'url' => "http://ns.useplus.org/ldf/xmp/1.0/",     
 array('prefix' => "aux", 			'url' => "http://ns.adobe.com/exif/1.0/aux/",        'name' => "Exif Schema for Additional Exif Properties"),
 array('prefix' => "exif", 			'url' => "http://ns.adobe.com/exif/1.0/",              'name' => "Exif Schema for Exif-specific Properties"),
 array('prefix' => "tiff", 			'url' => "http://ns.adobe.com/tiff/1.0/",                 'name' => "Exif Schema for TIFF Properties"),
-array('prefix' => "xap", 			'url' => "http://ns.adobe.com/xap/1.0/",                  'name' => ""),
-array('prefix' => "stRef", 		    'url' => "http://ns.adobe.com/xap/1.0/sType/ResourceRef#",'name' => ""),
-array('prefix' => "xapMM", 		    'url' => "http://ns.adobe.com/xap/1.0/mm/",               'name' => ""),
-array('prefix' => "test",           'url' => "http://lirant.corp/",                           'name' => "Test"),
-//array('prefix' => "", 'url' => ""),
+array('prefix' => "xap", 			'url' => "http://ns.adobe.com/xap/1.0/",                  ),
+array('prefix' => "stRef", 		    'url' => "http://ns.adobe.com/xap/1.0/sType/ResourceRef#",),
+array('prefix' => "xapMM", 		    'url' => "http://ns.adobe.com/xap/1.0/mm/",               ),
 
     	);
     	xmpUrl::insert($prefixs);

@@ -10,10 +10,14 @@ use Illuminate\Support\Str;
 use App\XmpParser;
 use App\xmpUrl;
 use SplFileInfo;
+use DOMDocument;
 use function Couchbase\defaultDecoder;
 
 class xmpController extends Controller
 {
+    private $a=[];
+    private $o=[];
+
     private $content = [];
     /**
      * Create a new controller instance.
@@ -43,23 +47,19 @@ class xmpController extends Controller
         $imageName = $image->getClientOriginalName();
         $newName = $token.$imageName;
         $image->move(public_path() . '/images/ChangeXMP/',$newName);
+
         return json_encode( ['extractXMP' => $xmpData, 'imageName' => $newName]);
     }
 
-    public function setXMP(Request $request)
+    public function setNewXMP(Request $request)
     {
-        $ImageName = $request['changeImageName'];
-        $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
-        $contents = file_get_contents($file->getPathname());
-
-        $input = $request ->get('xmp');
+        $input = $request -> all();
         $xmpString = 'Unknown format';
 
         if (isset($input['x:xmpmeta'])) {
             $xmpString = '<x:xmpmeta xmlns:x="adobe:ns:meta/"';
             $data = $input['x:xmpmeta'];
 
-            //print_r($data);
             if(isset($data['@attributes'])) {
                 $xmpString.= $this->getArrtibutes($data['@attributes']);
             }
@@ -74,86 +74,171 @@ class xmpController extends Controller
             $xmpString.= $this->handle($data, false, $tags);
             $xmpString.= "</rdf:RDF></x:xmpmeta>";
         }
-        //dd($xmpString);
 
+        print_r($xmpString);
+    }
+
+    public function setXMP(Request $request)
+    {
+        $ImageName = $request['changeImageName'];
+        $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
+        $contents = file_get_contents($file->getPathname());
+        $input = $request ->get('xmp');
+        $xmpString = 'Unknown format';
+
+        if (isset($input['x:xmpmeta'])) {
+            $xmpString = '<x:xmpmeta xmlns:x="adobe:ns:meta/"';
+            $data = $input['x:xmpmeta'];
+
+            if(isset($data['@attributes'])) {
+                $xmpString.= $this->getArrtibutes($data['@attributes']);
+            }
+            $xmpString.= '> ';
+            $xmpString.= '<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> ';
+            $tags = false;
+            if (isset($input['tags'])) {
+                $tags = $input['tags'];
+            }
+            $xmpString.= $this->handle($data, false, $tags);
+            $xmpString.= " </rdf:RDF> </x:xmpmeta>";
+        }
         $xmpDataStart = strpos($contents, '<x:xmpmeta');
         $xmpDataEnd = strpos($contents, '</x:xmpmeta>');
         $xmpLength = $xmpDataEnd - $xmpDataStart;
         $lastXMP = substr($contents, $xmpDataStart, $xmpLength + 12);
-         //dd($lastXMP);
         $description = stristr($lastXMP, '<rdf:Description rdf:about=""');
-        //$description=trim($description, "\n");
-        $description = str_replace("\n", ' ', $description);
+        $description = str_replace("\n", '', $description);
         $description = str_replace("    ", ' ', $description);
-        //dd($description);
+        $description = str_replace("   ", ' ', $description);
         $description = stristr($description, '>', true);
         $pattern = '~xmlns:.*/"~';
         $xmlns= null;
-        preg_match_all ( $pattern , $description , $xmlns );
-        //dd($xmlns);
-        $newDescription = '<rdf:Description rdf:about="" '.$xmlns[0][0];
-        //dd($newDescription);
+        preg_match_all ( $pattern ,$description, $xmlns );
+        $newXmlns = str_replace('xmlns',' xmlns', $xmlns[0][0]);
+        $newDescription = "\n".'<rdf:Description rdf:about=""'."\n".$newXmlns;
         $newXmpString = str_replace('<rdf:Description rdf:about=""',$newDescription, $xmpString);
-        //substr_replace($xmpString, '$xmlns', 0);
-        //dd($newXmpString );
-        //dd($description);
-        //dd("new",$newXmpString,"last",$lastXMP);
-        //dd("last",$lastXMP);
-        $xmpDataExtractor = new XmpParser();
-        $x = file_get_contents('images/last.txt');
-        $ImageName = $request['changeImageName'];
-        $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
-        $contents = file_get_contents($file->getPathname());
-        $x=trim($x, " \n");
-
-        //dd("new",$x,"last",$lastXMP);
-//        dd($newXmpString);
-        //dd($newXmpString);
-        $newphrase = str_replace($lastXMP,$newXmpString, $contents);
-        $xmpDataStart = strpos($newphrase, '<x:xmpmeta');
-        $xmpDataEnd = strpos($newphrase, '</x:xmpmeta>');
-        $xmpLength = $xmpDataEnd - $xmpDataStart;
-        $last = substr($newphrase, $xmpDataStart, $xmpLength + 12);
-//        dd($last);
-         //dd($lastXMP);
-        $f=fopen(public_path() . '/images/ChangeXMP/'.$ImageName,'w');
-
-        $e=fwrite($f,$newphrase);
-        //dd($e);
-        fclose($f);
-        file_put_contents('images/test.txt', $newphrase);
-        var_dump(file_get_contents('images/test.txt')); die();
-        //dd($last);
-        $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
-        $contents = file_get_contents($file->getPathname());
-        $xmpDataStart = strpos($contents, '<x:xmpmeta');
-        $xmpDataEnd = strpos($contents, '</x:xmpmeta>');
-        $xmpLength = $xmpDataEnd - $xmpDataStart;
-        $c = substr($newphrase, $xmpDataStart, $xmpLength + 12);
-        dd('change',$c);
-
-        /*if (fwrite($file, $newphrase) === FALSE) {
-            dd('aaaaa');
+        $newXmpString = str_replace('><','> <', $newXmpString);
+        $newXmpString = str_replace('> <','>'."\n".'<', $newXmpString);
+        $pattern = '~xmlns:.*">~';
+        $trimDescription= null;
+        preg_match_all ( $pattern ,$newXmpString, $trimDescription );
+        $enterDescription = str_replace('" ','"'."\n", $trimDescription[0][2]);
+        $newXmpString = str_replace($trimDescription[0][2],$enterDescription, $newXmpString);
+        $i = 0;
+        $lines_count = substr_count($newXmpString , "\n") + 1;
+        $pattern = "~.*\n~";
+        $trimString = null;
+        preg_match_all ( $pattern ,$newXmpString, $trimString );
+        $new=null;
+        foreach ($trimString[0] as $val) {
+            if ($i == 1) {
+                $new=$new.' '.$val;
+            }
+            if ($i == 2) {
+                $new=$new.'  '.$val;
+            }
+            if ($i > 2) {
+                $new=$new.'   '.$val;
+            }
+            $i++;
         }
-        */
-        //dd(file_put_contents($file, $newphrase));
-       // file_put_contents($file, $newphrase);
+        $a = $this->checkIndex($trimString[0]);
+        $n=null;$i = 0;
+        foreach ($a as $v) {
+            if ($i < 2) {
+                $n=$n.$v;
+            }
+            if ($i == 2) {
+                $n=$n.' '.$v;
+            }
+            if ($i > 2) {
+                  $n=$n.'   '.$v;
+            }
+            ++$i;
+        }
+        $nord=$n.'</x:xmpmeta>';
+        $trimString = null;
+        preg_match_all ( $pattern ,$new, $trimString );
+        $pattern = "~<.*~";
+        $tr = null;
+        preg_match_all ( $pattern ,$newXmpString, $tr );
+        for ($i=2; $i<$lines_count-2; $i++) {
+            $mass['start'][] = $i;
+            $trim = stristr($trimString[0][$i],'>',true);
+            $mass['atr'][] = $trim;
+        }
 
-      /* if(file_put_contents($file, $newphrase)==false)
-       {
-           dd($x);
-       }*/
+        $mass = [ 'atr','start', 'end'];
+        foreach ( $trimString[0] as $val) {
+            if ($i > 2) {
+                $mass['start'][] = $i;
+                $trim = stristr($val,'>',true);
+                $mass['atr'][] = $trim;
+            }
+            $i++;
+        }
 
-/*
         $ImageName = $request['changeImageName'];
+        $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
+        $contents = file_get_contents($file->getPathname());
+        $newphrase = str_replace($lastXMP,$nord, $contents);
+        $f=fopen(public_path() . '/images/ChangeXMP/'.$ImageName,'w');
+        fwrite($f,$newphrase);
+        fclose($f);
+
+         //$xmpDataExtractor = new XmpParser();
+        //$x = file_get_contents('images/last.txt');
+        //$x = trim($x, " \n");
+        /*
+         * //$contents.= $newXmpString;
+        //$xmpDataStart = strpos($newphrase, '<x:xmpmeta');
+        //$xmpDataEnd = strpos($newphrase, '</x:xmpmeta>');
+        //$xmpLength = $xmpDataEnd - $xmpDataStart;
+        //$last = substr($newphrase, $xmpDataStart, $xmpLength + 12);
+        file_put_contents('images/test.txt', $newphrase);
         $file = new SplFileInfo(public_path() . '/images/ChangeXMP/'.$ImageName);
         $contents = file_get_contents($file->getPathname());
         $xmpDataStart = strpos($contents, '<x:xmpmeta');
         $xmpDataEnd = strpos($contents, '</x:xmpmeta>');
         $xmpLength = $xmpDataEnd - $xmpDataStart;
-        $last = substr($contents, $xmpDataStart, $xmpLength + 12);
-       dd('aa',$last);
-        return ($xmpString);*/
+        $c = substr($contents, $xmpDataStart, $xmpLength + 12);
+        dd('change',$c);*/
+
+    }
+
+    private function checkTag($str)
+    {
+        if (preg_match("~.*<.*>.*</~", $str)) {
+            return 0;
+        }
+        if(!preg_match("~^<.*>$~", $str)) {
+            return 0;
+        }
+        if(preg_match("~^</.+>~", $str))  {
+            $this->a[]=$str;
+            return -1;
+        }
+
+        return 1;
+    }
+
+    public function checkIndex($mass_str)
+    {
+        $sp = "";
+        foreach ($mass_str as $index => $str)
+        {
+            $str = trim($str, " ");
+            $tag = $this->checkTag($str);
+            $mass_str[$index] = $sp.$str;
+            if($tag === 1) {
+                $sp .= " ";
+            }
+            else if($tag === -1){
+                $sp = mb_substr($sp, 0, -1);
+            }
+        }
+
+        return $mass_str;
     }
 
     private function handle($xmp, $header = false, $tags = false)
@@ -212,10 +297,9 @@ class xmpController extends Controller
                             }
                         }
                         elseif (is_array($value)) {
+                            $this->o[]=$value;
                             if (array_key_exists("@attributes", $value)) {
-
                                 $arrtEx_ = count($value) === 1;
-
                                 if ($arrtEx_) {
                                     $line.= $this->getArrtibutes($value['@attributes'], false, "<".XmpParser::RDF_LI, $arrtEx_);
                                 }
@@ -225,7 +309,12 @@ class xmpController extends Controller
                                 }
                             }
                             else {
-                                //handle ??
+                                foreach ($value as $val){
+                                $line.= "<".XmpParser::RDF_LI.">";
+                                $line.=$val;
+                                $line.= "</".XmpParser::RDF_LI.">";
+                                    $arrtEx_ = true;
+                                }
                             }
                         }
                         else {
@@ -267,7 +356,12 @@ class xmpController extends Controller
                                 }
                             }
                             else {
-                                //handle?
+                                foreach ($value as $val) {
+                                    $line .= "<" . XmpParser::RDF_LI ."> ";
+                                    $line .= $val;
+                                    $line .= "</" .XmpParser::RDF_LI . ">";
+                                    $arrtEx_ = true;
+                                }
                             }
                         }
                         else {
@@ -299,7 +393,6 @@ class xmpController extends Controller
                     if ($key === "@attributes") {
                         continue;
                     }
-
                     if (is_array($value)) {
                         if ($this->has_string_keys($value) && !array_key_exists("@content", $value)) {
                             if (!array_key_exists("@attributes", $value)) {
@@ -315,19 +408,17 @@ class xmpController extends Controller
                                 $line.=$this -> handle($value_, $key);
                             }
                         }
-                        //$line.= $this -> handle($value, $key);
                     }
                     else {
-                        //$line.= $key.":".$value;
                         $line.= "<".$key.">".$value."</".$key.">";
                     }
                 }
             }
         }
-
         if ($header && !$arrtEx) {
             $line.= "</".$header.">";
         }
+
         return $line;
     }
 
@@ -375,10 +466,9 @@ class xmpController extends Controller
             $tegs[] = $prefix . ":" . $name;
         }
         $same = [];
-        $masName = [];
         $data = $request['Description'];
         $nameData = array_keys($data);
-
+        $attributesName = array_keys($request['Description']['@attributes']);
         foreach ($nameData as $valueD) {
             foreach ($tegs as $valueT) {
                 if (strcmp($valueD, $valueT) == 0) {
@@ -400,7 +490,17 @@ class xmpController extends Controller
                     }
                 }$i++;
             }
-
+        foreach ($attributesName  as $value) {
+        foreach (array_keys($request['Description']['@attributes'][$value]) as $valueN) {
+            $name=$value.':'.$valueN;
+            foreach ($tegs as $valueT) {
+                if (strcmp($name, $valueT) == 0) {
+                    $dataAttributes = ['XmpText' => $request['Description']['@attributes'][$value][$valueN]];
+                    $same[] = ['name' => $valueT, 'data' => $dataAttributes];
+                }
+            }
+         }
+        }
         $resultList = [];
         $list = xmpUrl::select('name','prefix') -> get();
         foreach ($list as $key => $value) {
@@ -423,9 +523,29 @@ class xmpController extends Controller
                     if($valui['name'] == $n)
                     {
                         $valui['append'] = false;
+
+                        foreach ($attributesName as $val) {
+                            if (strcmp($valui["prefix"],$val) == 0 && strcmp($valui["prefix"],'Iptc4xmpCore') != 0) {
+                                if (isset($vln['data']['XmpText'])) {
+                                    $text[] = $vln['data']['XmpText'];
+                                }
+                                if (isset($vln['data']['rdf:Bag'])) {
+                                    $text = $vln['data']['rdf:Bag'];
+                                }
+                                if (isset($vln['data']['rdf:Alt'])) {
+                                    $text[] = $vln['data']['rdf:Alt']['@content'];
+                                }
+                                $valui['text'] = $text;
+                                $text = [];
+                            }
+                        }
+
                         if(strcmp($valui["prefix"], "Iptc4xmpCore") == 0)
                         {
-                            $text[] = $vln['data'];
+                            if (isset($vln['data']['XmpText'])) {
+                                $text[] = $vln['data']['XmpText'];
+                            }
+                            else { $text[] = $vln['data']; }
                             $valui['text'] = $text;
                             $text = [];
                         }
@@ -449,50 +569,130 @@ class xmpController extends Controller
                                 $valui['text'] = $Seq;
                             }
 
-                        }$result[] = $valui;
+                        }
+                        $result[] = $valui;
                     }
                 }
             }
         }
-       // $data = $request['xmp'];
-       // dd($data);
-
-
-
-       /* $list = $request['list'];
-        //dd($list);
-        foreach ($list as $value) {
-            $d['name'] = $value['name'];
-            $d['prefix'] = $value['prefix'];
-            foreach ($value['list'] as $val) {
-
-                foreach ($result as $v) {
-                    }
-                    if (strcmp($val['name'],$v['name'])!=0) {
-                        $arr[] = $val;
-                        $d['list'] = $arr;
-                    }
-
-                //dd($d);
-
+        $i = 0; $l =0;
+        $new = array_keys($request['Description']);
+        foreach(array_keys($request['Description']) as $iptc) {
+            if ($iptc == 'Iptc4xmpCore:CreatorContactInfo') {
+                foreach(array_keys($request['Description'][$iptc]['@attributes']['Iptc4xmpCore']) as $iptcAttr) {
+                    $pref = 'Iptc4xmpCore'.':'.$iptcAttr;
+                    array_push($new, $pref);
+                }
             }
-            $newList[] = $d;
-        }*/
-       // dd(response()->json( ['List2' => $result, 'Lists' => $newList ] ));
-        //dd($result);
-        return response()->json( ['list2' => $result ]); //, 'lists' => $newList ] );
+        }
+        foreach (array_keys($request['Description']['@attributes']) as $attr) {
+            foreach (array_keys($request['Description']['@attributes'][$attr]) as $val) {
+                if ($val == "CreatorContactInfo") {
+                    foreach(array_keys($request['Description']['@attributes'][$attr][$val]['@attributes']['Iptc4xmpCore']) as $iptc) {
+                        $pref = $attr . ':' . $iptc;
+                        array_push($new, $pref);
+                    }
+                }
+                $pref = $attr . ':' . $val;
+                array_push($new, $pref);
+            }
+        }
+        $lastList = $request['list'];
+        $newList = $request['list'];
+        foreach ($lastList as $value) {
+            foreach ($new as $val) {
+                $pref = stristr($val, ':', true);
+                if($value['prefix'] == 'Iptc4xmpCore') {
+                    foreach ($value['list'] as $listI) {
+                        $without =substr(strrchr($val, ":"), 1);
+                        if($listI['name'] == $without && $listI['name'] != 'CreatorContactInfo') {
+                            $a[] =($newList[$i]['list'][$l]);
+                        }
+                        ++$l;
+                    }$l = 0;
+                }
+                if($value['prefix'] == $pref) {
+                    foreach ($value['list'] as $list) {
+                        $without =substr(strrchr($val, ":"), 1);
+                        if($list['name'] == $without) {
+                            unset($newList[$i]["list"][$l]);
+                        }
+                        ++$l;
+                    }$l = 0;
+                }
+            }
+            ++$i;
+        }
+        $masL = [];
+        foreach (array_keys($newList) as $list) {
+            foreach ($newList[$list]['list'] as $listS) {
+                array_push($masL,$listS);
+            }
+            $newList[$list]['list'] = [];
+            array_push($newList[$list]['list'],$masL);
+            $masL = [];
+        }
+
+        return response()->json( ['list2' => $result , 'list' => $newList ] );
     }
 
     public function changeXMP (Request $request)
     {
-        //dd($request);
-      // $newText = $request['item']['newText'];
-        //dd($request['XMPforChange']);
-       //$itemName = $request['item']['prefix'] . ':' . $request['item']['name'];
         $itemName = $request['item'];
-        //dd($itemName);
-       $changeXMP = $request['XMPforChange']['x:xmpmeta']['rdf:Description'];
-        $xmpName = array_keys($changeXMP);
+        $changeXMP = $request['XMPforChange']['x:xmpmeta']['rdf:Description'];
+        $xmpName = array_keys($changeXMP);  $core = []; $coreEnd = [];
+        $attributesName = array_keys($request['XMPforChange']['x:xmpmeta']['rdf:Description']["@attributes"]);
+        $attributesData = $request['XMPforChange']['x:xmpmeta']['rdf:Description']["@attributes"];
+        foreach ($xmpName as $value) {
+            if (strcmp($value, "Iptc4xmpCore:CreatorContactInfo") == 0) {
+                $core = array_keys($changeXMP[$value]["@attributes"]["Iptc4xmpCore"]);
+            }
+        }
+        foreach ($itemName as $value) {
+            $newName[] = $value['item']["prefix"] . ":" . $value['item']['name'];
+        }
+        foreach ($core as $diff) {
+            $coreEnd[] ="Iptc4xmpCore:".$diff;
+        }
+        foreach ($attributesName as $attr) {
+            foreach (array_keys($attributesData[$attr]) as $attrN) {
+                $coreEnd[] = $attr . ":" . $attrN;
+                $diffAttributes[] = ['name' =>$attrN, 'prefix' => $attr];
+            }
+        }
+        $newDiff = array_merge($xmpName,$coreEnd);
+        $different = array_diff($newName, $newDiff);
+        $number = array_keys($different);
+        if(!empty($number)) {
+            foreach ($number as $num) {
+                $type = $itemName[$num]['item']['type'];
+                if ($type == 'LangAlt') {
+                    $text = ["@content" => $itemName[$num]["newText"][0]["text"], "@attributes" => ["xml" => ["lang" => "x-default"]]];
+                    $contentTag = ["rdf:Alt" => $text];
+                }
+                if ($type == 'XmpBag') {
+                    foreach ($itemName[$num]["newText"] as $bag) {
+                        $bags[] = $bag["text"];
+                    }
+                    $text = $bags;
+                    $contentTag = ["rdf:Bag" => $text];
+                    $bags = [];
+                }
+                if ($type == 'XmpText') {
+                    $text = $itemName[$num]["newText"][0]["text"];
+                    $contentTag = $text;
+                }
+                if ($type == 'XmpSeq') {
+                    foreach ($itemName[$num]["newText"] as $bag) {
+                        $bags[] = $bag["text"];
+                    }
+                    $text = $bags;
+                    $contentTag = ["rdf:Seq" => $text];
+                    $bags = [];
+                }
+                $newItemTag[] = ["$different[$num]" => $contentTag];
+            }
+        }
         foreach ($xmpName as $value) {
             if (strcmp($value, "Iptc4xmpCore:CreatorContactInfo") == 0)
             {
@@ -507,10 +707,18 @@ class xmpController extends Controller
                     }
                 }
             }
+            if (isset($diffAttributes)) {
+                foreach ($diffAttributes as $core) {
+                    foreach ($itemName as $item){
+                        if(strcmp($core['name'],$item['item']['name']) == 0) {
+                            $changeXMP["@attributes"][$core['prefix']][$core['name']]=$item["newText"][0]["text"];
+                        }
+                    }
+                }
+            }
             foreach ($itemName as $val) {
                 $valName = $val['item']["prefix"].":".$val['item']['name'];
                 if (strcmp($value,$valName) == 0) {
-
                     $atr = array_keys($changeXMP[$value]);
                     if ($atr[0] == 'rdf:Alt') {
                         $changeXMP[$value]['rdf:Alt']['@content'] = $val["newText"][0]["text"];
@@ -541,12 +749,33 @@ class xmpController extends Controller
         }
         $newXMP = $request['XMPforChange'];
         $newXMP['x:xmpmeta']['rdf:Description'] = $changeXMP;
-        return response()->json( ['newXMP' => $newXMP ]);
+        $count = count($newXMP['x:xmpmeta']['rdf:Description']);
+        if(!empty($newItemTag))
+        {
+            $whithoutAttributes =  array_slice($newXMP['x:xmpmeta']['rdf:Description'], 0, $count-1);
+            $attributes = ["@attributes" => end($newXMP['x:xmpmeta']['rdf:Description'])];
 
-        /*$a ="aaaaaaaaaaaabbbbbbbbbbbbdddddddddddd";
-        $b ="bbbbbbbbbbbb";
-        $bodytag = str_replace( $b, "black",$a);
-        dd($bodytag);*/
+            foreach ($newItemTag as $val) {
+                $tag = array_keys($val);
+                $tagN = stristr($tag[0], ':', true);
+                    if(isset($attributes["@attributes"][$tagN])) {
+                        $name = substr(strrchr($tag[0], ":"), 1);
+                        $label = [ $name => $val[$tag[0]]];
+                        $attributesXMP = array_merge($attributes["@attributes"]['xmp'],$label);
+                        $attributes["@attributes"]['xmp'] = $attributesXMP;
+                    }
+                    else{
+                        $whithoutAttributes = array_merge($whithoutAttributes,$val);
+                    }
+            }
+            $mergeDescription = array_merge($whithoutAttributes,$attributes);
+            $newXMP['x:xmpmeta']['rdf:Description'] = $mergeDescription;
+            return response()->json( ['newXMP' => $newXMP ]);
 
+        }
+        else {
+
+            return response()->json( ['newXMP' => $newXMP ]);
+        }
     }
 }
