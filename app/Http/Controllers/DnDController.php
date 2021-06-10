@@ -25,13 +25,16 @@ class DnDController extends Controller
      */
     public function index()
     {
-        $list = xmpUrl::select('name','prefix') -> get();
+        $list = xmpUrl::select('name','prefix')
+            ->where('name','!=','')
+            -> get();
         $resultList = [];
         foreach ($list as $key => $value) {
             $tags = xmpTag::getExternal($value['prefix']);
                 $resultList[$key] = $value;
                 $resultList[$key]['list'] = $tags;
         }
+
         return view('drag_and_drop', ["lists" => $resultList]);
     }
 

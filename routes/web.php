@@ -15,6 +15,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/Calendar', function () {
+    return view("bookingPhotosession");
+})->name('event');
+
+Route::get('/Profile', function () {
+    return view("profile");
+})->name('profile');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -26,3 +34,12 @@ Route::post('/xmp/set', 'xmpController@setXMP');
 Route::post('/xmp/new/set', 'xmpController@setNewXMP');
 Route::post('/xmp/show', 'xmpController@showXMP');
 Route::post('/xmp/change', 'xmpController@changeXMP');
+Route::get('/get/user/new/xmp', 'xmpController@getUserXMP');
+Route::post('/booking/photosession', 'PhotosessionController@booking');
+Route::post('/change/booking/photosession', 'PhotosessionController@change');
+Route::get('/booking/get/photosession', 'PhotosessionController@get');
+Route::post('/get/event/details', 'PhotosessionController@getDatails');
+Route::post('/get/user/chose/xmp', 'PhotosessionController@getChoseXMP');
+
+
+

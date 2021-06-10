@@ -11,15 +11,13 @@ class XMP extends Authenticatable
 {
     use Notifiable;
 
-    protected $table = 'change_xmp';
+    protected $table = 'new_xmp';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'id', 'xmp',
-    ];
+    protected $fillable = [ 'user_id', 'name_xmp', 'label_file' ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -27,14 +25,17 @@ class XMP extends Authenticatable
      * @var array
      */
 
-    public static function createChangeXMP($xmp)
+    public static function createXMP($request)
     {
-        //dd($xmp);
-       /* $success = self::create([
-            'xmp' => $xmp,
+        $success = self::create([
+            'user_id' => $request['user_id'],
+            'name_xmp' => $request['name_xmp'],
+            'label_file' => $request['label'],
         ]);
 
-        return response()->json(["status" => $success]);*/
+        
+
+        return response()->json(["status" => $success]);
     }
 
 

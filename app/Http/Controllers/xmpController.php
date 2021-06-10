@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\ChangeXmp;
+use App\Event;
+use App\User;
+use App\XMP;
 use Illuminate\Http\Request;
 use App\xmpTag;
 use Illuminate\Support\Facades\DB;
@@ -51,9 +54,16 @@ class xmpController extends Controller
         return json_encode( ['extractXMP' => $xmpData, 'imageName' => $newName]);
     }
 
+    public function getUserXMP() {
+        $user = auth()->user();
+        $xmp = $user->getXMP;
+
+        return json_encode( ['getUserXMP' => $xmp ] );
+    }
+
     public function setNewXMP(Request $request)
     {
-        $input = $request -> all();
+        $input = $request['xmp'];
         $xmpString = 'Unknown format';
 
         if (isset($input['x:xmpmeta'])) {
@@ -75,7 +85,16 @@ class xmpController extends Controller
             $xmpString.= "</rdf:RDF></x:xmpmeta>";
         }
 
-        print_r($xmpString);
+        $user = auth()->user();
+        $name = $user->name.Str::random(10);
+        $fp = fopen(public_path() . '/images/NewXMP/'.$user->name.$user->id.'/'.$name.'txt', "w");
+        fwrite($fp, $xmpString);
+        fclose($fp);
+
+        $new = ["user_id"=> $user->id,"name_xmp" => $name, 'label' => $request['label']];
+        $return = XMP::createXMP($new);
+
+        return response()->json( ['id_createXMP' => $return ] );
     }
 
     public function setXMP(Request $request)

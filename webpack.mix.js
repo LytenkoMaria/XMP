@@ -16,6 +16,6 @@ mix.js('resources/js/app.js', 'public/js')
 
 mix.autoload({
     'jquery': ['$', 'window.jQuery', 'jQuery'],
-    'vue': ['Vue','window.Vue'],   
-    'moment': ['moment','window.moment'],   
-  })
+    'vue': ['Vue','window.Vue'],
+    'moment': ['moment','window.moment'],
+  });

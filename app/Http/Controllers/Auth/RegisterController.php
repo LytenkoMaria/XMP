@@ -63,10 +63,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $newUser =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $oldumask = umask(0);
+        mkdir(public_path() ."/images/NewXMP/".$data['name'].$newUser->id, 0700);
+        umask($oldumask);
+
+        return $newUser;
     }
 }

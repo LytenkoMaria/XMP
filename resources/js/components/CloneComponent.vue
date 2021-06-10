@@ -1,11 +1,38 @@
 <template>
   <div class="container">
-      <div class="mt-2 row justify-content-center">
+      <div class="mt-2 row justify-content-end">
+          <div v-if="keyGenerate == 'true'" class="col-md-4">
+              <select  v-on:change="addListElem" v-model="selectElem" class="form-control list" id="exampleFormControlSelect1">
+                  <option v-for="option in selectList" :disabled="option.disabled">
+                      {{ option.name }} {{option.disabled}}
+                  </option>
+              </select>
+          </div>
           <div class="col-md-8">
-              <div class="card">
-                  <div class="card-body">
-                      <input type="file"   @change="getXmp"  class="btn form-control-file">
-                      <button class="mt-3 btn btn-secondary button" @click="changeXMP">Change</button>
+              <div class="d-flex flex-row justify-content-between">
+                  <div v-if="keyGenerate == 'true'" class="block">
+                      <div v-if="errors.input == true" class="alert alert-danger" role="alert">This field is require!</div>
+                      <div class="input-group input-group-lg">
+                          <div class="input-group-prepend">
+                              <span class="input-group-text lable-in-text" id="inputGroup-sizing-lg">New name</span>
+                          </div>
+                          <input  v-model="fileName" type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
+                      </div>
+                  </div>
+                  <div class="block" ml-4>
+                      <div class="input__wrapper">
+                          <input v-if="keyGenerate == 'true'" @click="generate" class="input input__file" multiple>
+                          <input v-if="uploadLable == 'Upload'" @change="getXmp"  type="file" id="input__file" class="input input__file" multiple>
+                          <input v-if="uploadLable == 'Change'" @click="changeXMP" class="input input__file" multiple>
+                          <label for="input__file" id="button-change" class="input__file-button">
+                              <span class="input__file-icon-wrapper">
+                                  <img v-if="uploadLable == 'Upload' && keyGenerate == 'false'" src="http://xmp/images/Download.png" class="input__file-icon" width="30">
+                                  <img v-if="uploadLable == 'Change' && keyGenerate == 'false'" src="http://xmp/images/Change1.png" class="input__file-icon" width="30">
+                                  <img v-if="keyGenerate == 'true'" src="http://xmp/images/Create.png" class="input__file-icon" width="30">
+                              </span>
+                              <span class="input__file-button-text">{{uploadLable}}</span>
+                          </label>
+                      </div>
                   </div>
               </div>
           </div>
@@ -54,7 +81,8 @@
           <div class="card-header">
             XMP
           </div>
-          <div class="card-body form-xml-card" >
+          <div class="xmp-scroll-body form-xml-card" >
+            <div v-if="errors.xmp == true" class="alert alert-danger" role="alert">You try to upload empty xmp!</div>
             <draggable
               class="dragArea list-group"
               :list="list2"
@@ -85,12 +113,6 @@
       <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
     </div>
     <br>
-    <div class="row">
-      <div class="col">
-        <button class="btn btn-secondary button" @click="generate" data-toggle="modal" data-target=".bd-example-modal-lg">Generate</button>
-      </div>
-    </div>
-
     <div  class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="false">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -119,19 +141,37 @@ export default {
     lists: Array,
   },
   created() {
+      this.getTagsforSelect(this.lists);
+      this.saveTags = this.lists;
+      this.lists = this.lists.slice(0,1);
+      console.log(this.selectList);
+    $('#button-change').removeClass('change-btn-show');
     this.$eventBus.$on('setStructure', this.setStructure);
   },
-
+  mounted: function(){
+     this.$nextTick(this.openGenerate())
+      const parentElem = $('#heading0');
+      const childElem = parentElem[0].childNodes[0].childNodes[0];
+      childElem.click();
+  },
   beforeDestroy() {
     this.$eventBus.$off('setStructure');
   },
   data() {
     return {
+      keyGenerate: false,
       i: null,
+      errors: {
+          input: false,
+          xmp: false,
+      },
+      uploadLable: 'Upload',
+      fileName: null,
       changeXMPitem: [],
       change: false,
       list2: [],
       list: [],
+      saveTags: [],
       items: {},
       dragging: false,
       missList: false,
@@ -143,11 +183,17 @@ export default {
       uploadImage : null,
       xmp: {},
       changeImageName: null,
+      selectList: [],
+      selectElem: null
     };
   },
   methods: {
     log: function(evt) {
-        //window.console.log(evt);
+        window.console.log(evt);
+    },
+    openGenerate : function() {
+        this.keyGenerate = localStorage.getItem('generate');
+        if(this.keyGenerate == 'true') { this.uploadLable = 'Save to event';}
     },
     getNewXMP: function(item) {
         this.changeXMPitem.push(item);
@@ -175,6 +221,10 @@ export default {
         }.bind(this));
         this.send();
       }
+      else {
+          this.errors.xmp = true;
+      }
+      if(this.fileName == null){ this.errors.input = true; }
     },
     setStructure: function(item, name, prefix) {
       this.usedTags.push(prefix);
@@ -186,10 +236,13 @@ export default {
       xmp['x:xmpmeta'] = {};
       xmp['x:xmpmeta']['rdf:Description'] = this.items;
       xmp['tags'] = this.usedTags;
-      axios.post('/xmp/new/set', xmp)
+      axios.post('/xmp/new/set', {'xmp':xmp, 'label': this.fileName})
           .then(
               (response) => {
-              this.xmpContent = response.data;
+                  localStorage.setItem('id_new_xmp', response.data.id_createXMP.original.status.id);
+                  localStorage.setItem('generate', false);
+                  localStorage.setItem('name_new_xmp', this.fileName);
+                  window.location.href = '/Calendar?modal=true';
           },
           (error) => {
             console.log(error.message);
@@ -261,7 +314,9 @@ export default {
           this.change = true;
           const config = { 'content-type': 'multipart/form-data' }
           let vm = this
-          let uploadedFile = e.target.files[0]
+          let uploadedFile = e.target.files[0];
+          $('#button-change').addClass('change-btn-show');
+          this.uploadLable = 'Change';
           const formData = new FormData()
           formData.append('attachment', uploadedFile)
           this.formData = formData;
@@ -277,12 +332,12 @@ export default {
                           }
                           this.xmpDescription = xmp['x:xmpmeta']['rdf:Description'];
                           this.xmp = xmp;
-                          axios.post('/xmp/show', {'Description': this.xmpDescription, 'xmp': xmp , 'list': this.lists})
+                          axios.post('/xmp/show', {'Description': this.xmpDescription, 'xmp': xmp , 'list': this.saveTags})
                               .then(
                                   (response) => {
 
                                       this.list2 = response.data.list2;
-                                      this.saveList = response.data.list
+                                      this.saveList = response.data.list;
                                       for (let population in this.saveList) {
                                           this.mas = [response.data.list[population].list[0]]
                                           response.data.list[population].list = null;
@@ -333,6 +388,22 @@ export default {
       },
       changeXMP : function() {
         this.$eventBus.$emit('test', this.xmp);
+      },
+      getTagsforSelect : function( listSelect) {
+          this.selectList = listSelect.slice(1);
+      },
+      addListElem : function() {
+          let saveItem = null;
+          let vm = this
+          this.selectList.forEach(function(item, index) {
+              if(vm.selectElem == item.name) {
+                   saveItem = item;
+                   vm.selectList[index].disabled = true
+              }
+          });
+          if (saveItem) {
+              this.lists.push(saveItem);
+          }
       }
   }
 };
