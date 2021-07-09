@@ -10,15 +10,12 @@ import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import CKEditor from '@ckeditor/ckeditor5-vue';
-
+import CKEditor from 'ckeditor4-vue';
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-
 Vue.use( CKEditor );
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -38,8 +35,8 @@ Vue.component('handle-component-get', require('./components/handleComponentGet.v
 Vue.component('xmp-component', require('./components/xmpComponent.vue').default);
 Vue.component('calendar-component', require('./components/CalendarComponent.vue').default);
 Vue.component('profile-component', require('./components/Profile.vue').default);
-Vue.component('profile-editor', require('./components/profile-editorComponent.vue').default);
-
+Vue.component('profile-editor-component', require('./components/profile-editorComponent.vue').default);
+Vue.component('gallery', require('./components/Gallery.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52,6 +49,3 @@ Vue.prototype.$bus = new Vue();
 const app = new Vue({
     el: '#app',
 });
-
-
-

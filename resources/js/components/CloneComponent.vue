@@ -1,8 +1,9 @@
 <template>
   <div class="container">
       <div class="mt-2 row justify-content-end">
-          <div v-if="keyGenerate == 'true'" class="col-md-4">
-              <select  v-on:change="addListElem" v-model="selectElem" class="form-control list" id="exampleFormControlSelect1">
+          <div class="col-md-4">
+              <select  v-on:change="addListElem" v-model="selectElem" class="form-control" id="exampleFormControlSelect1">
+                  <option selected disabled>Add other XMP tags</option>
                   <option v-for="option in selectList" :disabled="option.disabled">
                       {{ option.name }} {{option.disabled}}
                   </option>
@@ -184,7 +185,7 @@ export default {
       xmp: {},
       changeImageName: null,
       selectList: [],
-      selectElem: null
+      selectElem: 'Add other XMP tags',
     };
   },
   methods: {
@@ -404,6 +405,7 @@ export default {
           if (saveItem) {
               this.lists.push(saveItem);
           }
+          this.selectElem = 'Add other XMP tags';
       }
   }
 };

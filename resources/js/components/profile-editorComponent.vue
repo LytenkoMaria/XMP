@@ -1,60 +1,78 @@
 <template>
-    <div>
-        <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
-        <button v-on:click="emptyEditor()">Empty the editor</button>
-        <br><br>
-        <h2>Editor display html code </h2>
-        <br>
-        <div>{{editorData}}</div>
-        <h2>Editor display html Result </h2>
-        <br>
-        <button v-on:click="displayEditorResult()">display result </button>
-        <br><br>
-
-        <div id="resultingText"></div>
+    <div class="container rad">
+        <ckeditor v-if="show"  v-model="editorData" :config="editorConfig"></ckeditor>
+        <div class="rad">
+        <button v-if="show" type="button" v-on:click.prevent="getData()" class="mt-3 btn savebtn btn-outline-primary">Save changes</button>
+        <button v-if="show" type="button" v-on:click.prevent="previewEditor()" class="mt-3 ml-4 btn preview btn-outline-danger">Preview</button>
+        <button v-if="show" type="button" v-on:click.prevent="cancelEditor()" class="mt-3 ml-4 btn cancel btn-outline-danger">Cancel</button>
+        </div>
     </div>
+
 </template>
 
 <script>
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
-
+    name: "editor",
+    props: ['show', 'saveChangeProfile', 'cancel', 'preview'],
     data() {
         return {
-
-            editor: ClassicEditor,
-            editorData: 'ckeditor 5 for laravel and vuejs',
+            editorData: null,
             editorConfig: {
-                // The configuration of the editor.
-            },
+                toolbar: [
+                    { name: 'clipboard', items: [ 'Cut', '-', 'Undo', 'Redo' ] },
+                    { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+                    { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+                    { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+                    { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+                    { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+                    { name: 'insert', items: ['HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+                    { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+                    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+                    ],
 
-
+            }
         };
     },
 
-    mounted(){
-
-        console.log('Component mounted.')
-    },
     methods: {
-        emptyEditor() {
-            this.editorData = '';
+        getData: function () {
+            this.saveChangeProfile({
+                data: this.editorData
+            })
         },
-        displayEditorResult(){
-            document.getElementById('resultingText').innerHTML = this.editorData;
+        showText: function () {
+           this.editorData = this.lastText;
+        },
+        getProfile: function () {
+            axios.get('/profile/get')
+                .then(
+                    (response) => {
+                        if (response.data.profile[0].text) {
+                            this.editorData = response.data.profile[0].text;
+                        }
+                    },
+                    (error) => {
+                        console.log(error.message);
+                    }
+                )
+        },
+        cancelEditor:  function () {
+            this.cancel({
+                cancel: false
+            })
+        },
+        previewEditor:  function () {
+            this.preview({
+                preview: true,
+                newText: this.editorData
+            })
         }
+    },
+    created(){
+        this.showText();
+        this.getProfile();
     }
-
 }
 </script>
-
-<script>
-export default {
-name: "profile-editorComponent"
-}
-</script>
-
-<style scoped>
-
-</style>
+<style scoped></style>

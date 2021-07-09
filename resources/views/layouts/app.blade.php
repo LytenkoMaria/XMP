@@ -17,6 +17,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style id="modal-success-style"> </style>
 </head>
 <body>
 
@@ -44,10 +45,10 @@
                             <a class="nav-link" href="{{ route('dnd') }}">{{ __('DnD test') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('xmp') }}">{{ __('XMP test') }}</a>
+                            <a class="nav-link" href="{{ route('event') }}">{{ __('Calendar') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('event') }}">{{ __('Calendar') }}</a>
+                            <a class="nav-link" href="{{ route('gallery') }}">{{ __('Gallery') }}</a>
                         </li>
                         <!-- Authentication Links -->
                         @guest

@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Didact+Gothic|Comfortaa:400,700&subset=latin,cyrillic);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)
@@ -11450,6 +11450,17 @@ a.text-dark:focus {
   cursor: pointer;
 }
 
+.input__file2 {
+  margin-top: -13% !important;
+  opacity: 0;
+  position: unset;
+  height: 48px !important;
+  min-width: 200px;
+  display: -webkit-box;
+  display: flex;
+  cursor: pointer;
+}
+
 .input__file-icon-wrapper {
   height: 50px;
   width: 50px;
@@ -11485,6 +11496,10 @@ a.text-dark:focus {
   cursor: pointer;
   margin: 0 auto;
   font-size: 1.3rem;
+}
+
+.hov:hover {
+  background-color: #0980ff;
 }
 
 .change-btn-show {
@@ -11575,21 +11590,312 @@ a.text-dark:focus {
 
 .icon-profile {
   display: block;
-  max-width: 100%;
-  height: auto;
+  position: relative;
+  margin-left: auto;
+  max-height: 150px;
+  margin-right: auto;
+}
+
+.form-control-file {
+  width: unset !important;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .photograf {
   display: block;
   max-width: 100%;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .media {
   font-size: 21pt !important;
+  width: 30px;
+  cursor: pointer;
+  box-sizing: unset;
 }
 
 .follow-me {
   text-align: center !important;
+  font-family: "Comfortaa", cursive;
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #333333;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty-img-icon {
+  font-size: 60px;
+  color: #d4d4d4;
+  position: relative;
+  top: 170px;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: inline-block;
+}
+
+.empty-img-border {
+  border: 6px solid #d4d4d4;
+  border-radius: 10px;
+  border-style: dashed;
+  display: block;
+  height: 70%;
+  min-height: 400px;
+}
+
+.empty-img-border-top {
+  margin-left: auto;
+  margin-right: auto;
+  border: 6px solid #d4d4d4;
+  border-radius: 10px;
+  border-style: dashed;
+  display: block;
+  height: 70%;
+  max-width: 40%;
+  margin-bottom: 30px;
+}
+
+.empty-img-top-icon {
+  font-size: 50px !important;
+  top: 40px !important;
+  display: block;
+  padding-bottom: 15px;
+  margin-right: 80%;
+}
+
+.border-cont {
+  position: absolute;
+  width: 68%;
+  z-index: -1;
+  height: 135%;
+  margin-left: 2%;
+  margin-top: -5% !important;
+  border-right: 2px solid #c6c6c6;
+  border-left: 2px solid #c6c6c6;
+}
+
+.navbar-expand-md {
+  z-index: 100;
+}
+
+a.animated-button.thar-one {
+  color: #007bffb5;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  padding: 10px;
+  border-radius: 0px !important;
+  border: 2px solid #007bffb5;
+  -webkit-transition: all 0.3s cubic-bezier(1, 1, 1, 1) 0s;
+  transition: all 0.3s cubic-bezier(1, 1, 1, 1) 0s;
+}
+
+a.animated-button.thar-one.cancel {
+  color: #ff5959 !important;
+  border: 2px solid #ff5959 !important;
+}
+
+a.animated-button.thar-one:hover {
+  color: #ffffff !important;
+  background-color: transparent;
+  text-shadow: none;
+}
+
+a.animated-button.thar-one:hover:before {
+  bottom: -1%;
+  top: auto;
+  height: 102%;
+}
+
+a.animated-button.thar-one:before {
+  display: block;
+  position: absolute;
+  left: -1px;
+  top: 1px;
+  height: 0px;
+  width: 101%;
+  z-index: -1;
+  content: "";
+  color: #ffffff !important;
+  background: #007bffb5;
+  -webkit-transition: all 0.3s cubic-bezier(1, 1, 1, 1) 0s;
+  transition: all 0.3s cubic-bezier(1, 1, 1, 1) 0s;
+}
+
+a.animated-button.thar-one.cancel:before {
+  background: #ff5959 !important;
+}
+
+.fa-instagram:hover {
+  background: linear-gradient(45deg, #ffe950 0%, #ff571a 50%, #6a00cf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.inst {
+  background: linear-gradient(45deg, #ffe950 0%, #ff571a 50%, #6a00cf 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fa-vk:hover {
+  color: #2787f5;
+}
+
+.fa-facebook:hover {
+  color: #4867aa;
+}
+
+.fa-twitter:hover {
+  color: #5da9dd;
+}
+
+.media-input {
+  margin-left: 20px;
+  width: 80% !important;
+}
+
+.change-media {
+  cursor: unset !important;
+  font-size: 21pt !important;
+  width: 30px;
+}
+
+.profile-download-btn {
+  max-width: 20% !important;
+}
+
+.link-prof {
+  text-decoration: none !important;
+  color: black !important;
+}
+
+.rad {
+  border-radius: 0px !important;
+}
+
+.rad .btn {
+  border-radius: 0px !important;
+}
+
+.cancel:hover {
+  background: #ff6977 !important;
+  border-color: #ff6977 !important;
+}
+
+.savebtn:hover {
+  background: #3898ffc7 !important;
+  border-color: #3898ffc7 !important;
+}
+
+.preview {
+  color: #f1ab32 !important;
+  border-color: #f1ab32 !important;
+}
+
+.preview:hover {
+  color: white !important;
+  background: #f1ab32 !important;
+  border-color: #f1ab32 !important;
+}
+
+.btn-delated {
+  margin-left: -40%;
+  margin-top: -1px;
+  height: 48px;
+  width: 130px;
+  cursor: pointer;
+  font-size: 1.3rem !important;
+  background-color: #ff516a !important;
+  border-color: #ff516a !important;
+}
+
+.btn-delated:hover {
+  background-color: #dc3545 !important;
+}
+
+.add-directory {
+  width: 10%;
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.directory {
+  text-align: center;
+  width: 120px;
+  word-wrap: break-word;
+}
+
+.directoryImg {
+  text-align: justify;
+  width: 50%;
+  padding-top: 5px;
+}
+
+.add-directory:hover {
+  border: 3px solid #bcf2ff !important;
+}
+
+.name-directory {
+  font-size: 15px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.success-label {
+  font-size: 30px;
+  font-weight: 600;
+  color: white;
+  margin-left: 15px !important;
+}
+
+.error-label {
+  width: 300px;
+  position: absolute;
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 600;
+  color: white;
+  margin-left: 15px !important;
+}
+
+.fa-check-circle {
+  font-size: 50px;
+  color: white;
+}
+
+.fa-times-circle {
+  font-size: 50px;
+  color: white;
+  margin-left: -40px;
+  margin-top: 15px;
+}
+
+.success-container {
+  font-size: 50px;
+  color: white;
+  margin-left: 50px;
+  position: absolute;
+  top: -30px;
+}
+
+.modal {
+  margin-top: 3% !important;
+  margin-left: 5% !important;
+}
+
+.directory {
+  float: left;
+  height: 110px;
+  cursor: pointer;
 }
 
